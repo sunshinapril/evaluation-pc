@@ -1,10 +1,6 @@
 <template>
   <div class="right-menu">
-    <div @click="toMessageCenter" class="right-menu-item">
-      <svg-icon name="icon_4" />
-      <span class="message-text">消息中心</span>
-      <span class="red-dot" v-show="unRead"></span>
-    </div>
+
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
         <div class="user-avatar">
@@ -30,28 +26,7 @@
 
 <script setup>
 import { CaretBottom } from "@element-plus/icons-vue";
-import { ref, onMounted } from "vue";
 import avatar from "@/assets/images/user/avatar.png";
-import { useRouter } from "vue-router";
-import { getNoReadCount } from "@/api/messageNotice";
-import useUser from "@/store/modules/user";
-const unRead = ref(false);
-const router = useRouter();
-const toMessageCenter = () => {
-  router.push({ path: "/user/messageCenter" });
-  unRead.value = false;
-};
-
-onMounted(() => {
-  // getUnReadNum();
-});
-
-const getUnReadNum = async () => {
-  const { data } = await getNoReadCount();
-  if (data) {
-    unRead.value = true;
-  }
-};
 
 const logout = () => {
   ElMessageBox.confirm("确定注销并退出系统吗？", "提示", {

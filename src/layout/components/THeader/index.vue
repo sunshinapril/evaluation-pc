@@ -1,10 +1,10 @@
 <template>
   <div class="t-header">
     <div class="nav-container">
-      <company-logo />
+      <!-- <company-logo /> -->
       <!-- <top-nav></top-nav> -->
     </div>
-    <!-- <user-info /> -->
+    <user-info />
   </div>
 </template>
 <script setup>

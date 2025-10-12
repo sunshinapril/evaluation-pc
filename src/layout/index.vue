@@ -1,22 +1,26 @@
 <template>
   <div class="g-main">
-    <div class="top-wrap">
-      <t-header />
-    </div>
     <el-container class="g-container">
       <!-- 侧边栏 -->
       <div class="sidebar" v-if="isSidebar">
-        <!-- <div class="sidebar"> -->
+        <div class="sidebar-header">
+          <img class="sidebar-header-img" src="@/assets/images/login/logo.png" alt="" />
+        </div>
         <div class="sidebar-content">
           <sidebar />
         </div>
       </div>
       <div class="g-router-view">
-        <div class="breadcrumb-container">
+        <div class="top-wrap">
+          <t-header />
+        </div>
+        <!-- <div class="breadcrumb-container">
           <hamburger id="hamburger-container" class="hamburger-container" />
           <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+        </div> -->
+        <div class="main">
+          <router-view />
         </div>
-        <router-view />
       </div>
     </el-container>
   </div>
@@ -47,11 +51,6 @@ const isSidebar = computed(() => {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  .top-wrap {
-    height: 50px;
-    flex-shrink: 0;
-    border-bottom: 8px solid #f0f2f5;
-  }
   .g-container {
     display: flex;
     flex: 1;
@@ -59,29 +58,45 @@ const isSidebar = computed(() => {
     .g-router-view {
       height: 100%;
       flex: 1;
-      margin-left: 20px;
-      margin-right: 10px;
       overflow: hidden;
-      overflow-y: auto;
       display: flex;
       flex-direction: column;
-      .breadcrumb-container {
+      .top-wrap {
+        height: 101px;
         flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        height: 50px;
-        line-height: 50px;
       }
+      .main {
+        flex: 1;
+        padding: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        background: #E1EDFF;
+      }
+      // .breadcrumb-container {
+      //   flex-shrink: 0;
+      //   display: flex;
+      //   align-items: center;
+      //   height: 50px;
+      //   line-height: 50px;
+      // }
     }
     .sidebar {
-      width: 200px;
+      width: 256px;
       height: 100%;
       flex-shrink: 0;
-      overflow: visible;
-      padding-bottom: 20px;
-      background: #f7fafd;
-      position: relative;
-      box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.13);
+      background: #fff;
+      box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.1),0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      &-header {
+        height: 81px;
+        flex-shrink: 0;
+        &-img {
+          width: 100%;
+          height: 100%;
+        }
+      }
       // &.isCollapse {
       //   width: 200px;
       //   .sidebar-content {
@@ -92,6 +107,7 @@ const isSidebar = computed(() => {
       //   }
       // }
       .sidebar-content {
+        flex: 1;
         height: 100%;
         overflow: hidden;
         overflow-y: auto;

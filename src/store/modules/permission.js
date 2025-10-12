@@ -51,10 +51,10 @@ export const filterAsyncRouter = (asyncRouterMap, parentPath) => {
     if (route.component) {
       // Layout组件特殊处理
       // if (route.redirect === 'noRedirect' && route.children.length) {
-      if (route.children.length) {
+      if (route.children && route.children.length) {
         let firstChildPath = route.children[0].path
-        // route.redirect = firstChildPath.startsWith('/') ? firstChildPath : route.path + '/' + firstChildPath
-        route.redirect = firstChildPath;
+        route.redirect = firstChildPath.startsWith('/') ? firstChildPath : route.path + '/' + firstChildPath
+        // route.redirect = firstChildPath;
       }
       if (route.component === 'Layout') {
         if (level != 1) {

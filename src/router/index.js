@@ -82,6 +82,7 @@ function addPathMatch() {
   }
 }
 
+
 const handleMenu = (data) => {
   return data.map((item) => {
     item.name = item.menuName;
@@ -105,7 +106,9 @@ const handleMenu = (data) => {
 export const loadMenus = (to) => {
   return buildMenus()
     .then((res) => {
-      const data = handleMenu(res.date);
+      console.log(res, "res");
+      // const data = handleMenu(res.date);
+      const data = res.date;
       const asyncRouter = filterAsyncRouter(data);
       console.log(asyncRouter, "asyncRouter");
       // 处理输入/路由的情况
