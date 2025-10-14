@@ -8,8 +8,8 @@
   </div>
 </template>
 <script setup>
-import TopNav from "./TopNav.vue";
-import CompanyLogo from "./CompanyLogo.vue";
+// import TopNav from "./TopNav.vue";
+// import CompanyLogo from "./CompanyLogo.vue";
 import UserInfo from "./UserInfo.vue";
 </script>
 <style lang="less" scoped>

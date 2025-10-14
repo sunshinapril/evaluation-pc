@@ -62,7 +62,7 @@ const isSidebar = computed(() => {
       display: flex;
       flex-direction: column;
       .top-wrap {
-        height: 101px;
+        height: 60px;
         flex-shrink: 0;
       }
       .main {
@@ -82,7 +82,7 @@ const isSidebar = computed(() => {
       // }
     }
     .sidebar {
-      width: 256px;
+      width: 200px;
       height: 100%;
       flex-shrink: 0;
       background: #fff;
@@ -90,7 +90,7 @@ const isSidebar = computed(() => {
       display: flex;
       flex-direction: column;
       &-header {
-        height: 81px;
+        width: 100%;
         flex-shrink: 0;
         &-img {
           width: 100%;
