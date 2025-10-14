@@ -99,6 +99,34 @@ const list = ref([
     city: "100",
     city2: "100",
   },
+  {
+    index: 9,
+    project: "孕期筛查",
+    type: "评估数",
+    city: "100",
+    city2: "100",
+  },
+  {
+    index: 10,
+    project: "孕期筛查",
+    type: "阳性数",
+    city: "100",
+    city2: "100",
+  },
+  {
+    index: 11,
+    project: "孕期筛查",
+    type: "转诊数",
+    city: "100",
+    city2: "100",
+  },
+  {
+    index: 12,
+    project: "孕期筛查",
+    type: "拒诊数",
+    city: "100",
+    city2: "100",
+  },
 ]);
 
 
