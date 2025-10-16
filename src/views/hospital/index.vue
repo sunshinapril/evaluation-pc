@@ -204,11 +204,12 @@ onMounted(() => {
     border-radius: 4px;
     background: #fff;
     .table-button {
-      font-size: 32px;
+      font-size: 20px;
       color: #4F8DF5;
       cursor: pointer;
       .del {
         color: #EF4444;
+        margin-left: 20px;
       }
     }
   }

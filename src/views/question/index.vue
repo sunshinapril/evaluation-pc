@@ -1,13 +1,21 @@
 <template>
   <div class="home-page">
     <el-form class="query-container" inline>
-      <el-form-item props="date">
+      <el-form-item props="content">
         <el-input
           class="query-input"
           v-model="queryParams.content"
-          placeholder="请输入医生名称"
+          placeholder="请输入问题名称"
           :prefix-icon="Search"
         />
+      </el-form-item>
+      <el-form-item props="type">
+        <el-select v-model="queryParams.type" placeholder="请选择类别" class="query-select">
+          <el-option label="全部" value=""></el-option>
+          <el-option label="咨询" value="1"></el-option>
+          <el-option label="建议" value="2"></el-option>
+          <el-option label="反馈" value="3"></el-option>
+        </el-select>
         <el-button style="margin-left: 12px" type="primary" @click="setQuery">
           <svg-icon name="search" style="margin-right: 6px;" />搜索</el-button>
         <el-button style="margin-left: 12px" type="primary" @click="handleAdd">
@@ -19,15 +27,19 @@
       </el-form-item>
     </el-form>
     <q-table :query="query">
-      <el-table-column prop="name" label="姓名" :show-overflow-tooltip="true" min-width="120"></el-table-column>
-      <el-table-column prop="account" label="帐号" :show-overflow-tooltip="true" min-width="120"></el-table-column>
-      <el-table-column prop="phone" label="联系电话" :show-overflow-tooltip="true" min-width="180"></el-table-column>
-      <el-table-column prop="hospital" label="医院" :show-overflow-tooltip="true" min-width="100"></el-table-column>
-      <el-table-column prop="level" label="级别" :show-overflow-tooltip="true" min-width="120"></el-table-column>
+      <el-table-column prop="index" label="ID" width="50"></el-table-column>
+      <el-table-column prop="sort" label="排序" width="100"></el-table-column>
+      <el-table-column prop="question" label="问题" :show-overflow-tooltip="true" min-width="180"></el-table-column>
+      <el-table-column prop="type" label="类别" :show-overflow-tooltip="true" min-width="100"></el-table-column>
+      <el-table-column prop="option1" label="选项1" :show-overflow-tooltip="true" min-width="120"></el-table-column>
+      <el-table-column prop="option2" label="选项2" :show-overflow-tooltip="true" min-width="120"></el-table-column>
+      <el-table-column prop="option3" label="选项3" :show-overflow-tooltip="true" min-width="120"></el-table-column>
+      <el-table-column prop="option4" label="选项4" :show-overflow-tooltip="true" min-width="120"></el-table-column>
+      <el-table-column prop="must" label="必填" :show-overflow-tooltip="true" min-width="80"></el-table-column>
       <el-table-column prop="status" label="状态" :show-overflow-tooltip="true" width="100">
         <template #default="scope">
-          <el-button v-if="scope.row.status === '1'" type="success" link>在职</el-button>
-          <el-button v-else type="info" link>离职</el-button>
+           <el-tag v-if="scope.row.status === '1'" type="success">启用</el-tag>
+          <el-tag v-else type="danger">禁用</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="city2" label="操作" :show-overflow-tooltip="true" width="100" fixed="right" align="center">
@@ -52,34 +64,46 @@ import { ElMessageBox, ElMessage } from 'element-plus'
 
 const defaultQueryParams = {
   content: '',
+  type: ''
 };
 const queryParams = ref(cloneDeep(defaultQueryParams));
 const list = ref([
   {
-    name: '张三',
-    account: 'zhangsan',
-    phone: '12345678901',
-    hospital: '中医医院',
-    level: '主任医生',
+    index: '1',
+    sort: '1',
+    question: '做事时提不起劲或者只有少许乐趣',
+    type: '咨询',
+    option1: '选项1',
+    option2: '选项2',
+    option3: '选项3',
+    option4: '选项4',
+    must: '是',
     status: '1'
   },
   {
-    name: '李四',
-    account: 'lisi',
-    phone: '12345678901',
-    hospital: '中医医院',
-    level: '主任医生',
-    status: '2'
-  }
-  ,
+    index: '2',
+    sort: '2',
+    question: '问题2',
+    type: '建议',
+    option1: '选项1',
+    option2: '选项2',
+    option3: '选项3',
+    option4: '选项4',
+    must: '是',
+    status: 0
+  },
   {
-    name: '王五',
-    account: 'wangwu',
-    phone: '12345678901',
-    hospital: '中医医院',
-    level: '主任医生',
+    index: '3',
+    sort: '3',
+    question: '问题3',
+    type: '反馈',
+    option1: '选项1',
+    option2: '选项2',
+    option3: '选项3',
+    option4: '选项4',
+    must: '是',
     status: '1'
-  }
+  },
 ]);
 
 const query = ref(null);
@@ -137,7 +161,7 @@ onMounted(() => {
     border-radius: 16px;
     background: #fff;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
-    .query-input {
+    .query-input, .query-select {
       width: 225px !important;
     }
   }

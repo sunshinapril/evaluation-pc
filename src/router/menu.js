@@ -70,6 +70,29 @@ export default
 
   },
   {
+    path: '/question',
+    name: 'Question',
+    component: 'Layout',
+    meta: {
+      title: '问题管理',
+      icon: 'icon-1',
+      hidden: false,
+    },
+    children: [
+      {
+        path: 'index',
+        name: 'QuestionIndex',
+        component: '/question/index',
+        meta: {
+          title: '问题管理',
+          icon: 'icon-1',
+          hidden: false,
+        }
+      }
+    ]
+
+  },
+  {
     path: '/system',
     name: 'UserManagement',
     component: 'Layout',
