@@ -4,7 +4,7 @@
       <!-- 侧边栏 -->
       <div class="sidebar" v-if="isSidebar">
         <div class="sidebar-header">
-          <img class="sidebar-header-img" src="@/assets/images/login/logo.png" alt="" />
+          <!-- <img class="sidebar-header-img" src="@/assets/images/login/logo.png" alt="" /> -->
         </div>
         <div class="sidebar-content">
           <sidebar />

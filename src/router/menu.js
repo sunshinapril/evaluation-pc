@@ -24,6 +24,52 @@ export default
 
   },
   {
+    path: '/hospital',
+    name: 'Hospital',
+    component: 'Layout',
+    meta: {
+      title: '医院管理',
+      icon: 'icon-1',
+      hidden: false,
+    },
+    children: [
+      {
+        path: 'index',
+        name: 'HospitalIndex',
+        component: '/hospital/index',
+        meta: {
+          title: '医院管理',
+          icon: 'icon-1',
+          hidden: false,
+        }
+      }
+    ]
+
+  },
+  {
+    path: '/doctor',
+    name: 'Doctor',
+    component: 'Layout',
+    meta: {
+      title: '医生管理',
+      icon: 'icon-1',
+      hidden: false,
+    },
+    children: [
+      {
+        path: 'index',
+        name: 'DoctorIndex',
+        component: '/doctor/index',
+        meta: {
+          title: '医生管理',
+          icon: 'icon-1',
+          hidden: false,
+        }
+      }
+    ]
+
+  },
+  {
     path: '/system',
     name: 'UserManagement',
     component: 'Layout',

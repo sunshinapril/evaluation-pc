@@ -126,7 +126,15 @@ defineExpose({
   .pagination-box {
     flex-shrink: 0;
     text-align: right;
-    padding: 15px 0;
+    padding: 20px;
   }
 }
+
+:deep(.el-table__body) {
+  // tr:hover > td.el-table__cell,
+  tr.current-row>td.el-table__cell {
+    background: #ffbebe !important;
+  }
+}
+
 </style>

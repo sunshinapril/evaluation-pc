@@ -6,28 +6,46 @@
         <div class="user-avatar">
           <img :src="avatar" class="user-avatar-img" />
         </div>
+        <!-- <div class="user-name">{{ userInfo.userName }}</div> -->
         <el-icon :size="18" style="color: rgba(0, 0, 0, 0.65)">
           <CaretBottom />
         </el-icon>
       </div>
       <template #dropdown>
         <el-dropdown-menu>
-          <router-link to="/user/profile">
-            <el-dropdown-item>个人中心</el-dropdown-item>
-          </router-link>
+          <el-dropdown-item @click.native="openDialog">修改密码</el-dropdown-item>
           <el-dropdown-item @click.native="logout">
             <span>退出登录</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
+    <el-dialog v-model="dialogVisible" title="修改密码" width="500px" center>
+      <el-form ref="formRef" :model="form" :rules="rules" label-width="80px"> 
+        <el-form-item label="旧密码" prop="oldPassword">
+          <el-input v-model="form.oldPassword" placeholder="请输入旧密码"></el-input>
+        </el-form-item>
+        <el-form-item label="新密码" prop="newPassword">
+          <el-input v-model="form.newPassword" placeholder="请输入新密码"></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码" prop="confirmPassword">
+          <el-input v-model="form.confirmPassword" placeholder="请确认新密码"></el-input>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="submitForm">确定</el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script setup>
 import { CaretBottom } from "@element-plus/icons-vue";
 import avatar from "@/assets/images/user/avatar.png";
-
+import useUser from "@/store/modules/user";
+import { computed, ref } from "vue";
+import { cloneDeep } from "lodash";
 const logout = () => {
   ElMessageBox.confirm("确定注销并退出系统吗？", "提示", {
     confirmButtonText: "确定",
@@ -38,6 +56,68 @@ const logout = () => {
     location.href = "/login";
   });
 };
+
+const defaultForm = {
+  oldPassword: "",
+  newPassword: "",
+  confirmPassword: "",
+};
+
+const form = ref(cloneDeep(defaultForm));
+const dialogVisible = ref(false);
+const rules = {
+  oldPassword: [
+    {
+      required: true,
+      message: "请输入旧密码",
+      trigger: "blur",
+    },
+  ],
+  newPassword: [
+    {
+      required: true,
+      message: "请输入新密码",
+      trigger: "blur",
+    },
+  ],
+  confirmPassword: [
+    {
+      required: true,
+      message: "请确认新密码",
+      trigger: "blur",
+      validator: (rule, value, callback) => {
+        if (!value) {
+          callback(new Error("请输入确认密码"));
+        } else if (value !== form.value.newPassword) {
+          callback(new Error("两次输入密码不一致"));
+        } else {
+          callback();
+        }
+      },
+    }
+  ]
+}
+
+const openDialog = () => {
+  form.value = cloneDeep(defaultForm);
+  dialogVisible.value = true;
+};
+const formRef = ref(null);
+const submitForm = () => {
+  formRef.value.validate((valid) => {
+    if (valid) {
+      dialogVisible.value = false;
+
+      // updatePassword(form.value).then((res) => {
+      //   ElMessage.success("修改密码成功");
+      //   dialogVisible.value = false;
+      // })
+    }
+  })
+};
+
+
+
 </script>
 
 <style scoped lang="less">
@@ -102,6 +182,12 @@ const logout = () => {
           width: 80%;
           height: 80%;
         }
+      }
+      .user-name {
+        font-size: 14px;
+        line-height: 20px;
+        color: rgba(0, 0, 0, 0.85);
+
       }
     }
   }
